@@ -824,12 +824,19 @@ namespace mRemoteNG.UI.Window
 
         public void Prot_Event_Closed(object sender)
         {
-            ProtocolBase protocolBase = sender as ProtocolBase;
-            if (!(protocolBase?.InterfaceControl.Parent is ConnectionTab tabPage)) return;
-            if (tabPage.Disposing || tabPage.IsDisposed) return;
-            if (IsDisposed || Disposing) return;
-            tabPage.protocolClose = true;
-            Invoke(new Action(() => tabPage.Close()));
+            try
+            {
+                ProtocolBase protocolBase = sender as ProtocolBase;
+                if (!(protocolBase?.InterfaceControl.Parent is ConnectionTab tabPage)) return;
+                if (tabPage.Disposing || tabPage.IsDisposed) return;
+                if (IsDisposed || Disposing) return;
+                tabPage.protocolClose = true;
+                Invoke(new Action(() => tabPage.Close()));
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage("CloseTab (UI.Window.ConnectionWindow) failed", ex);
+            }
         }
 
         #endregion
