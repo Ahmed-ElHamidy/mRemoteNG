@@ -5,7 +5,7 @@
     <NoWarn>$(NoWarn);NU1507</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="AWSSDK.Core" Version="4.0.3.6" />
+    <PackageVersion Include="AWSSDK.Core" Version="4.0.3.7" />
     <PackageVersion Include="AWSSDK.EC2" Version="4.0.65" />
     <PackageVersion Include="BouncyCastle.Cryptography" Version="2.6.2" />
     <PackageVersion Include="Castle.Core" Version="5.2.1" />
@@ -38,8 +38,8 @@
     <PackageVersion Include="Newtonsoft.Json.Schema" Version="4.0.1" />
     <PackageVersion Include="NSubstitute" Version="5.3.0" />
     <PackageVersion Include="NUnit" Version="4.4.0" />
-    <PackageVersion Include="NUnit.Console" Version="3.21.1" />
-    <PackageVersion Include="NUnit.ConsoleRunner" Version="3.21.1" />
+    <PackageVersion Include="NUnit.Console" Version="3.22.0" />
+    <PackageVersion Include="NUnit.ConsoleRunner" Version="3.22.0" />
     <PackageVersion Include="NUnit.Extension.TeamCityEventListener" Version="1.0.10" />
     <PackageVersion Include="NUnit.Runners" Version="3.12.0" />
     <PackageVersion Include="NUnit3TestAdapter" Version="6.0.1" />
@@ -100,6 +100,6 @@
     <PackageVersion Include="System.Xml.ReaderWriter" Version="4.3.1" />
     <PackageVersion Include="VaultSharp" Version="1.17.5.1" />
     <PackageVersion Include="VncSharpCore" Version="1.2.1" />
-    <PackageVersion Include="ZstdSharp.Port" Version="0.8.6" />
+    <PackageVersion Include="ZstdSharp.Port" Version="0.8.7" />
   </ItemGroup>
 </Project>
