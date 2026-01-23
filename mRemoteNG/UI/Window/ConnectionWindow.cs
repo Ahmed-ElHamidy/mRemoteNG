@@ -835,7 +835,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("CloseTab (UI.Window.ConnectionWindow) failed", ex);
+                Runtime.MessageCollector.AddExceptionMessage("CloseTab (UI.Window.ConnectionWindow) failed: ", ex);
             }
         }
 

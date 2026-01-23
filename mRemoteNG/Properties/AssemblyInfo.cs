@@ -1,4 +1,4 @@
-
+﻿
     
 
 //Generated for platform: x64
@@ -11,7 +11,7 @@ using System.Resources;
 
 // Compute version values
 
-//Build nr: 3225
+//Build nr: 3226
 
 // General Information
 [assembly: AssemblyTitle("mRemoteNG")]
@@ -24,7 +24,7 @@ using System.Resources;
 [assembly: AssemblyCulture("")]
 
 // Version information
-[assembly: AssemblyVersion("1.78.2.3225")]
-[assembly: AssemblyFileVersion("1.78.2.3225")]
+[assembly: AssemblyVersion("1.78.3.3226")]
+[assembly: AssemblyFileVersion("1.78.3.3226")]
 [assembly: NeutralResourcesLanguageAttribute("en-US")]
-[assembly: AssemblyInformationalVersion("1.78.2 (Nightly Build 3225) x64")]
+[assembly: AssemblyInformationalVersion("1.78.3 (Nightly Build 3226) x64")]
