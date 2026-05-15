@@ -2,7 +2,6 @@
 
 using mRemoteNG.App.Update;
 using mRemoteNG.Config.Settings;
-using mRemoteNG.DotNet.Update;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Resources.Language;
 using System;
@@ -24,7 +23,6 @@ namespace mRemoteNG.App
     public static class ProgramRoot
     {
         private static Mutex? _mutex;
-        private static FrmSplashScreenNew _frmSplashScreen = null;
         private static string customResourcePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Languages");
 
         private static System.Threading.Thread? _wpfSplashThread;
@@ -33,6 +31,13 @@ namespace mRemoteNG.App
         [STAThread]
         public static void Main(string[] args)
         {
+            // Must be called before any other WinForms / Application.* usage so that
+            // per-monitor font scaling and hit-testing are initialised correctly from
+            // the very first UI operation (dialogs shown in MainAsync, exception
+            // handlers, EnableVisualStyles, …).  The app manifest already declares
+            // PerMonitorV2 awareness; this call keeps the WinForms runtime in sync.
+            Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
+
             // Ensure the real entry point is definitely STA
             MainAsync(args).GetAwaiter().GetResult();
         }
@@ -41,38 +46,13 @@ namespace mRemoteNG.App
         {
             AppDomain.CurrentDomain.AssemblyResolve += OnAssemblyResolve;
 
-            string? installedVersion = DotNetRuntimeCheck.GetLatestDotNetRuntimeVersion();
-            //installedVersion = ""; // Force check for testing purposes
+#if !SELF_CONTAINED
+            // Runtime checks only needed for framework-dependent deployments
+            // Self-contained builds include the runtime, so no check is needed
+            // Note: .NET runtime check is not needed here — the .NET host (apphost)
+            // natively displays a missing-runtime dialog with a download link.
 
             var checkFail = false;
-
-            // Checking .NET Runtime version
-            var (latestRuntimeVersion, downloadUrl) = DotNetRuntimeCheck.GetLatestAvailableDotNetVersionAsync().GetAwaiter().GetResult();
-            if (string.IsNullOrEmpty(installedVersion))
-            {
-                try
-                {
-                    var result = ShowDownloadCancelDialog(
-                        $".NET " + DotNetRuntimeCheck.RequiredDotnetVersion + ".0 " + Language.MsgRuntimeIsRequired + "\n\n" +
-                        Language.MsgDownloadLatestRuntime + "\n" + downloadUrl + "\n\n" +
-                        Language.MsgExit + "\n\n",
-                        Language.MsgMissingRuntime + " .NET " + DotNetRuntimeCheck.RequiredDotnetVersion);
-
-                    if (result == DialogResult.OK && InternetConnection.IsPosible())
-                    {
-                        try
-                        {
-                            Process.Start(new ProcessStartInfo(fileName: downloadUrl) { UseShellExecute = true });
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show($"Unable to open download link: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
-                catch { }
-                checkFail = true;
-            }
 
             // Checking Visual C++ Redistributable version
             if (VCppRuntimeCheck.GetInstalledVcRedistVersions() == null || VCppRuntimeCheck.GetInstalledVcRedistVersions().Count == 0)
@@ -106,6 +86,7 @@ namespace mRemoteNG.App
             {
                 Environment.Exit(0);
             }
+#endif
 
             Lazy<bool> singleInstanceOption = new(() => Properties.OptionsStartupExitPage.Default.SingleInstance);
             if (singleInstanceOption.Value)
@@ -136,11 +117,6 @@ namespace mRemoteNG.App
                 // Suppress resolution exceptions; return null to continue standard probing
             }
             return null;
-        }
-
-        private static void CheckLockalDB()
-        {
-            LocalDBManager settingsManager = new LocalDBManager(dbPath: "mRemoteNG.appSettings", useEncryption: false, schemaFilePath: "");
         }
 
         private static void StartApplication()
@@ -269,7 +245,8 @@ namespace mRemoteNG.App
 
         // Helper to show a dialog with "Download" and "Cancel" buttons.
         // Returns DialogResult.OK if Download clicked, otherwise DialogResult.Cancel.
-        private static DialogResult ShowDownloadCancelDialog(string message, string caption)
+        // When hasValidUrl is false, the Download button is disabled.
+        private static DialogResult ShowDownloadCancelDialog(string message, string caption, bool hasValidUrl = true)
         {
             using Form dialog = new Form()
             {
@@ -320,6 +297,8 @@ namespace mRemoteNG.App
                 string? linkUrl = e.Link.LinkData as string;
                 if (string.IsNullOrEmpty(linkUrl))
                     return;
+                if (!hasValidUrl)
+                    return;
                 if (!InternetConnection.IsPosible())
                 {
                     MessageBox.Show("No internet connection is available.", "Network", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -337,6 +316,7 @@ namespace mRemoteNG.App
                 Text = "Download",
                 DialogResult = DialogResult.OK,
                 Size = new Size(100, 28),
+                Enabled = hasValidUrl,
             };
             Button btnCancel = new Button()
             {

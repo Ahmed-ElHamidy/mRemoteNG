@@ -19,7 +19,7 @@ namespace mRemoteNG.Resources.Language {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Language {
@@ -174,6 +174,15 @@ namespace mRemoteNG.Resources.Language {
         internal static string _Scan {
             get {
                 return ResourceManager.GetString("_Scan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Sessions.
+        /// </summary>
+        internal static string _Sessions {
+            get {
+                return ResourceManager.GetString("_Sessions", resourceCulture);
             }
         }
         
@@ -2910,6 +2919,15 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Jump to Session {0}.
+        /// </summary>
+        internal static string JumpToSession {
+            get {
+                return ResourceManager.GetString("JumpToSession", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (Automatically Detect).
         /// </summary>
         internal static string LanguageDefault {
@@ -3158,6 +3176,24 @@ namespace mRemoteNG.Resources.Language {
         internal static string MacAddress {
             get {
                 return ResourceManager.GetString("MacAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Windows User Account (DPAPI).
+        /// </summary>
+        internal static string MasterKeyProviderDpapi {
+            get {
+                return ResourceManager.GetString("MasterKeyProviderDpapi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        internal static string MasterKeyProviderPassword {
+            get {
+                return ResourceManager.GetString("MasterKeyProviderPassword", resourceCulture);
             }
         }
         
@@ -3491,6 +3527,15 @@ namespace mRemoteNG.Resources.Language {
         internal static string NewTitle {
             get {
                 return ResourceManager.GetString("NewTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Next Session.
+        /// </summary>
+        internal static string NextSession {
+            get {
+                return ResourceManager.GetString("NextSession", resourceCulture);
             }
         }
         
@@ -3960,6 +4005,15 @@ namespace mRemoteNG.Resources.Language {
         internal static string PowerShell {
             get {
                 return ResourceManager.GetString("PowerShell", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previous Session.
+        /// </summary>
+        internal static string PreviousSession {
+            get {
+                return ResourceManager.GetString("PreviousSession", resourceCulture);
             }
         }
         
@@ -6037,6 +6091,24 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set Master Password.
+        /// </summary>
+        internal static string SettingsStoreFirstRunTitle {
+            get {
+                return ResourceManager.GetString("SettingsStoreFirstRunTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unlock Settings.
+        /// </summary>
+        internal static string SettingsStoreUnlockTitle {
+            get {
+                return ResourceManager.GetString("SettingsStoreUnlockTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show description tooltips in connection tree.
         /// </summary>
         internal static string ShowDescriptionTooltips {
@@ -6150,6 +6222,15 @@ namespace mRemoteNG.Resources.Language {
         internal static string SingleClickOnOpenConnectionSwitchesToIt {
             get {
                 return ResourceManager.GetString("SingleClickOnOpenConnectionSwitchesToIt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rename items using slow double-click (Explorer style).
+        /// </summary>
+        internal static string SlowClickRenameEnabled {
+            get {
+                return ResourceManager.GetString("SlowClickRenameEnabled", resourceCulture);
             }
         }
         
